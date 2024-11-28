@@ -1,0 +1,30 @@
+﻿@model IEnumerable<LibraryApp.Models.Book>
+
+<h2>Book List</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Publisher</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var book in Model)
+        {
+            <tr>
+                <td>@book.Title</td>
+                <td>@book.Author</td>
+                <td>@book.Publisher</td>
+                <td>
+                    @if (TempData["Role"]?.ToString() == "Librarian")
+                    {
+                        <a href="@Url.Action("Delete", "Book", new { id = book.Id })" class="btn btn-danger">Delete</a>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

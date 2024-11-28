@@ -1,0 +1,27 @@
+﻿@model IEnumerable<dynamic>
+
+<h2>My Reservations</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Book Title</th>
+            <th>Reservation Date</th>
+            <th>Expiry Date</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var reservation in Model)
+        {
+            <tr>
+                <td>@reservation.Title</td>
+                <td>@reservation.ReservationDate.ToString("yyyy-MM-dd HH:mm")</td>
+                <td>@reservation.ExpiryDate.ToString("yyyy-MM-dd HH:mm")</td>
+                <td>
+                    <a href="@Url.Action("Cancel", "Reservation", new { id = reservation.Id })" class="btn btn-danger">Cancel</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

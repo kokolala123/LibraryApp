@@ -1,0 +1,35 @@
+﻿@model IEnumerable<dynamic>
+
+<h2>All Rentals</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Book Title</th>
+            <th>Borrower</th>
+            <th>Rental Date</th>
+            <th>Return Date</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var rental in Model)
+        {
+            <tr>
+                <td>@rental.Title</td>
+                <td>@rental.Username</td>
+                <td>@rental.RentalDate.ToString("yyyy-MM-dd HH:mm")</td>
+                <td>
+                    @if (rental.ReturnDate != null)
+                    {
+                        @rental.ReturnDate.ToString("yyyy-MM-dd HH:mm")
+                    }
+                    else
+                    {
+                        <a href="@Url.Action("MarkAsReturned", "Rental", new { id = rental.Id })" class="btn btn-success">Mark as Returned</a>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
