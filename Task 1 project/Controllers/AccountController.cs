@@ -24,19 +24,23 @@ namespace LibraryApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                user.Role = "OrdinaryUser"; // Default role
+                // Check if the username already exists
+                if (_context.Users.Any(u => u.Username == user.Username))
+                {
+                    ModelState.AddModelError("Username", "Username already exists.");
+                    return View(user);
+                }
+
+                // Save the user to the database
                 _context.Users.Add(user);
                 _context.SaveChanges();
+
                 return RedirectToAction("Login");
             }
+
             return View(user);
         }
 
-        // Login View
-        public IActionResult Login()
-        {
-            return View();
-        }
 
         // Handle Login
         [HttpPost]

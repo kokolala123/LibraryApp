@@ -6,7 +6,7 @@ namespace LibraryApp.Controllers
     {
         public IActionResult Index()
         {
-            return Content("Welcome to the Library Management System! The application is running.");
+            return View();
         }
     }
 }
